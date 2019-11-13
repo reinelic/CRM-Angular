@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { AuthService } from '../../services/auth.service';
-// import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-  form;
+  form: FormGroup;
   message;
   messageClass;
   processing = false;
@@ -21,7 +21,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    
+    private authService: AuthService,
+    private router: Router
   ) {
     this.createForm(); // Create Angular 2 Form when component loads
   }
@@ -48,7 +49,7 @@ export class RegisterComponent implements OnInit {
         Validators.required, // Field is required
         Validators.minLength(8), // Minimum length is 8 characters
         Validators.maxLength(35), // Maximum length is 35 characters
-        this.validatePassword // Custom validation
+        // this.validatePassword // Custom validation
       ])],
       // Confirm Password Input
       confirm: ['', Validators.required] // Field is required
@@ -165,7 +166,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  // Function to check if username is available
+  // // Function to check if username is available
   checkUsername() {
     // Function from authentication file to check if username is taken
     this.authService.checkUsername(this.form.get('username').value).subscribe(data => {

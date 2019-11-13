@@ -92,7 +92,7 @@ let passwordLengthChecker = (password) => {
     return false; // Return error
   } else {
     // Check password length
-    if (password.length < 8 || password.length > 35) {
+    if (password.length < 8 ||password.length > 35) {
       return false; // Return error if passord length requirement is not met
     } else {
       return true; // Return password as valid
@@ -128,7 +128,7 @@ const passwordValidators = [
 const userSchema = new Schema({
   email:{type:String,required:true,unique:true,lowercase:true,validate:emailValidators},
   username:{ type:String, required: true,unique:true,lowercase:true,validate:usernameValidators},
-  password:{type:String,required:true,validate:passwordValidators}
+  password:{type:String,required:true}
 });
 
 // userSchema.pre('save',(next)=> {
